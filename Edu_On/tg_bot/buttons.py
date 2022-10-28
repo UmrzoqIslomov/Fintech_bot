@@ -144,3 +144,14 @@ def admin_inline_btn(type, tur='ctg', page=1, len=1, ctg=None, video=None):
         ]
 
     return InlineKeyboardMarkup(btn)
+
+
+def inline_btns(type=None):
+    btn = []
+    if type == "reklama":
+        btn = [
+            [InlineKeyboardButton("FinTech Innovation Hub", callback_data="fintechhubuz",
+                                  url="https://t.me/fintechhubuz")],
+            # [InlineKeyboardButton("qwertyy’s group🗽", callback_data="qwertysgroup", url="https://t.me/qwertysgroup")],
+        ]
+    return InlineKeyboardMarkup(btn)

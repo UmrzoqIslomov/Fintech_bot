@@ -2,10 +2,30 @@ from telegram.ext import CallbackContext
 from telegram import ReplyKeyboardMarkup, KeyboardButton, Update, Bot
 import os
 from .buttons import *
+from .models import Log, User
 from .services import get_videos
 from .tgadmin import TGAdmin, rek_video, rek_rasm, admin_inline_handler
 
 
+def my_decorator_func(func):
+    def wrapper_func(update, context):
+        user_id = update.message.from_user.id
+        my_channel_id = ['@fintechhubuz']
+        statuss = ['creator', 'administrator', 'member']
+        for j in my_channel_id:
+            for i in statuss:
+                if i == context.bot.get_chat_member(chat_id=j, user_id=user_id).status:
+                    break
+            else:
+                context.bot.send_message(user_id,
+                                         "Assalomu Alaykum FintechHub tekin video kurslar botiga xush kelibsiz 👨🏻‍💻\n\nQuydagi kanalarga obuna bo'ling va 👉/start bosing",
+                                         reply_markup=inline_btns("reklama"))
+                return False
+        func(update, context)
+
+    return wrapper_func
+
+@my_decorator_func
 def start(update, context):
     user = update.message.from_user
     tglog = Log.objects.filter(user_id=user.id).first()
@@ -73,7 +93,7 @@ def start(update, context):
 #         if i['name'] == sub:
 #             return i
 
-
+@my_decorator_func
 def photo_handler(update, context):
     user = update.message.from_user
     tg_user = User.objects.filter(user_id=user.id).first()
@@ -85,7 +105,7 @@ def photo_handler(update, context):
         rek_rasm(update, context)
         return 0
 
-
+@my_decorator_func
 def video_handler(update, context):
     user = update.message.from_user
     video = update.message.video
@@ -105,7 +125,7 @@ def video_handler(update, context):
         rek_video(update, context)
         return 0
 
-
+@my_decorator_func
 def message_handler(update: Update, context: CallbackContext):
     bot: Bot = context.bot
     cwd = os.getcwd()
@@ -268,6 +288,7 @@ def message_handler(update: Update, context: CallbackContext):
         tglog.save()
 
 
+@my_decorator_func
 def inline_handler(update, context):
     query = update.callback_query
     user = query.from_user
