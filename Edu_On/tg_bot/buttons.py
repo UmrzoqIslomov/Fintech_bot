@@ -19,7 +19,6 @@ def btns(type=None, msg="", sub_id=0, page=1, ctg=None, sub=None, video=None):
     if type == "manu1":
         btn = [
             [KeyboardButton("Menu"), KeyboardButton("Biz bilan bog'lanish 📞")],
-            [KeyboardButton("🔙 Orqaga")]
         ]
 
     elif type == "ctgs":
