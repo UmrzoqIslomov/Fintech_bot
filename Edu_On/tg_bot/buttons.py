@@ -18,7 +18,7 @@ def btns(type=None, msg="", sub_id=0, page=1, ctg=None, sub=None, video=None):
     # - Bepul bo'limi uchun
     if type == "manu1":
         btn = [
-            [KeyboardButton("Menu"), KeyboardButton("Biz bilan bog'lanish 📞")],
+            [KeyboardButton("Kurslar 📚"), KeyboardButton("Biz bilan bog'lanish 📞")],
         ]
 
     elif type == "ctgs":

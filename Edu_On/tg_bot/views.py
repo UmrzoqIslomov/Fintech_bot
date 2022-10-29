@@ -234,7 +234,7 @@ def message_handler(update: Update, context: CallbackContext):
             update.message.reply_text("Parolni notog'ri kiridingiz")
             return 0
     else:
-        if msg == "Menu":
+        if msg == "Kurslar 📚":
             log['state'] = 9
             log['state'] = 10
             update.message.reply_text("Bosh Menu 👇", reply_markup=btns('ctgs'))
