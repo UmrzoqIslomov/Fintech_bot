@@ -3,6 +3,10 @@
 import os
 import sys
 
+import asyncio
+
+from Edu_On.settings import BASE_DIR
+
 
 def main():
     """Run administrative tasks."""
@@ -18,5 +22,10 @@ def main():
     execute_from_command_line(sys.argv)
 
 
+async def runbot():
+    os.chdir(BASE_DIR)
+    os.system('py manage.py runbot')
+
+
 if __name__ == '__main__':
-    main()
+    asyncio.run(main())
