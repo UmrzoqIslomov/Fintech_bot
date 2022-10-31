@@ -22,7 +22,6 @@ def my_decorator_func(func):
                                          reply_markup=inline_btns("reklama"))
                 return False
         func(update, context)
-
     return wrapper_func
 
 @my_decorator_func
@@ -30,7 +29,6 @@ def start(update, context):
     user = update.message.from_user
     tglog = Log.objects.filter(user_id=user.id).first()
     tg_user = User.objects.filter(user_id=user.id).first()
-
     # if msg == "buyurtma berush":
     #
     #     # s = ""
@@ -45,7 +43,6 @@ def start(update, context):
         tglog.save()
 
     log = tglog.messages
-
     if not tg_user:
         tg_user = User()
         tg_user.user_id = user.id
@@ -60,7 +57,6 @@ def start(update, context):
             tglog.save()
             TGAdmin(update, context)
             return 0
-
     tg_user.menu_log = 0
     tg_user.save()
     log.clear()
