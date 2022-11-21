@@ -9,7 +9,11 @@ from .tgadmin import TGAdmin, rek_video, rek_rasm, admin_inline_handler
 
 def my_decorator_func(func):
     def wrapper_func(update, context):
-        user_id = update.message.from_user.id
+        try:
+            user_id = update.callback_query.from_user.id
+        except:
+            user_id = update.message.from_user.id
+
         my_channel_id = ['@fintechhubuz']
         statuss = ['creator', 'administrator', 'member']
         for j in my_channel_id:
@@ -22,19 +26,15 @@ def my_decorator_func(func):
                                          reply_markup=inline_btns("reklama"))
                 return False
         func(update, context)
+
     return wrapper_func
+
 
 @my_decorator_func
 def start(update, context):
     user = update.message.from_user
     tglog = Log.objects.filter(user_id=user.id).first()
     tg_user = User.objects.filter(user_id=user.id).first()
-    # if msg == "buyurtma berush":
-    #
-    #     # s = ""
-    #     # for i in savat:
-    #     #
-    # context.bot.send_message(chat_id=910791889, text="salom dunyo")
 
     if not tglog:
         tglog = Log()
@@ -101,6 +101,7 @@ def photo_handler(update, context):
         rek_rasm(update, context)
         return 0
 
+
 @my_decorator_func
 def video_handler(update, context):
     user = update.message.from_user
@@ -120,6 +121,7 @@ def video_handler(update, context):
     elif astate == 708:
         rek_video(update, context)
         return 0
+
 
 @my_decorator_func
 def message_handler(update: Update, context: CallbackContext):

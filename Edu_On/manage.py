@@ -22,7 +22,8 @@ def main():
     execute_from_command_line(sys.argv)
 
 
-async def runbot():
+async def runserver():
+    print(BASE_DIR)
     os.chdir(BASE_DIR)
     os.system('py manage.py runbot')
 

@@ -47,19 +47,3 @@ def get_videos(sub_name, name=None):
                 result.append(i)
 
     return result
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
